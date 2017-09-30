@@ -20,7 +20,7 @@ function setup() {
 
   // Set initial values for parameters
   G = 6.67408 * pow(10,-11);
-  split_time = false;
+  split_time = true;
   split_factor = 1000;
   paused = false;
   draw_lines = false;
@@ -50,13 +50,19 @@ function windowResized(){
 }
 
 function switch_to_sim1(){
-
   SM.change_focus(0)
+  background('black')
 }
 
 function switch_to_sim2(){
   SM.change_focus(1)
+  background('black')
+}
+
+function change_pause(){
+  paused = !paused;
 }
 
 document.getElementById('sim1').addEventListener('click', switch_to_sim1)
 document.getElementById('sim2').addEventListener('click', switch_to_sim2)
+document.getElementById('pause_button').addEventListener('click', change_pause)
