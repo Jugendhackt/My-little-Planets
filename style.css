@@ -1,2 +1,13 @@
 @font-face { font-family: 'karmatic_arcade';
              src: url('ka1.ttf') format('truetype'); }
+
+button{
+  padding: 20px 10px;
+  background-color: #333333;
+  border: none;
+  color: white
+}
+
+button:hover{
+  color: #ff6400
+}
