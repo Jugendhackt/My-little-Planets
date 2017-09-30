@@ -4,30 +4,45 @@ var W = sim.clientWidth;
 var H = sim.clientHeight;
 
 //Constants
-var G;
+var Canvas,
+    G,
+    paused, draw_lines, save_dot_counter, save_dot, full_line,
+    split_time, split_factor;
 
 //Parameters
-var split_time = false;
-var split_factor = 1000;
 
 var OM = new Manager();
 
 
 console.log(OM);
-function setup() {
-  var canvas = createCanvas(W, H);
-  canvas.parent("simulation")
-  G = 6.67408 * pow(10,-11)
 
-  OM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),false, 100));
+function setup() {
+  // Create canvas
+  Canvas = createCanvas(W, H);
+  Canvas.parent("simulation");
+
+  // Set initial values for parameters
+  G = 6.67408 * pow(10,-11);
+  split_time = false;
+  split_factor = 1000;
+  paused = false;
+  draw_lines = true;
+  save_dot_counter = 0;
+  save_dot = true;
+  full_line = false;
+
+  OM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
   OM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
+  background('black');
 }
 
 function draw() {
-  background('black');
-  translate(W/2,H/2);
-  OM.update(10000)
-  OM.render();
+  if(!paused){
+    translate(W/2, H/2);
+    OM.reset();
+    OM.update(20000);
+    OM.render();
+  }
 }
 
 function windowResized(){
