@@ -17,3 +17,11 @@ button:hover{
   background-color: #777777;
   z-index: 999;
 }
+
+li{
+  font-size: 20px
+}
+
+li:hover{
+  font-size: 30px
+}
