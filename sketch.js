@@ -167,15 +167,20 @@ function switch_to_sim2(){
   background('black')
 }
 function change_pause(){
+var startimage = document.getElementById("start_button_image");
+var pauseimage = document.getElementById("pause_button_image");
+
   paused = !paused;
-  var content;
   if(paused){
-    content = "|>";
+  startimage.style.display="block";
+  pauseimage.style.display="none";
+
   }
   else{
-    content = "||";
+    startimage.style.display="none";
+    pauseimage.style.display="block";
   }
-  document.getElementById('pause_button').textContent = content;
+
 }
 function reset_all(){
   SM = new SimulationManager(new Simulation())
