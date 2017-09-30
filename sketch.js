@@ -170,10 +170,10 @@ function change_pause(){
   paused = !paused;
   var content;
   if(paused){
-    content = "|>"
+    content = "|>";
   }
   else{
-    content = "||"
+    content = "||";
   }
   document.getElementById('pause_button').textContent = content;
 }
@@ -193,4 +193,4 @@ document.getElementById("planetenauswahl").addEventListener("mouseout", hideMenu
 
 document.getElementById('menu').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.stop()}})
 document.getElementById('simulation').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.advance()}})
-document.getElementById('creator').addEventListener('click', function(event){if(ST.stage == 0){ST.advance();event.stopPropagation();}})
+document.getElementById('creator_button').addEventListener('click', function(event){if(ST.stage == 0){ST.advance();event.stopPropagation();}})
