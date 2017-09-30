@@ -1,5 +1,7 @@
-var W = window.innerWidth;
-var H = window.innerHeight;
+var sim = document.getElementById("simulation");
+
+var W = sim.clientWidth;
+var H = sim.clientHeight;
 
 //Constants
 var G;
@@ -13,7 +15,8 @@ var OM = new Manager();
 
 console.log(OM);
 function setup() {
-  createCanvas(W, H);
+  var canvas = createCanvas(W, H);
+  canvas.parent("simulation")
   G = 6.67408 * pow(10,-11)
 
   OM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),false, 100));
@@ -28,7 +31,7 @@ function draw() {
 }
 
 function windowResized(){
-  W = window.innerWidth;
-  H = window.innerHeight;
+  W = sim.clientWidth;
+  H = sim.clientHeight;
   resizeCanvas(W, H);
 }
