@@ -13,6 +13,65 @@ var Canvas,
 
 var SM = new SimulationManager(new Simulation());
 
+
+function SolidCreator(){
+  this.stage = 0;
+  this.mass = null;
+  this.solid_position = null;
+  this.velocity_position = null;
+}
+
+SolidCreator.prototype.advance = function () {
+  if(this.stage==0){
+    change_pause();
+    this.solid_position = new p5.Vector(mouseX, mouseY);
+    this.stage++;
+  }
+  else if(this.stage == 1){
+    this.stage++;
+  }
+  else if(this.stage == 2){
+    this.mass = 29.78*pow(10,3);
+
+
+    this.stage = 0;
+    this.mass = null;
+    this.solid_position = null;
+    this.velocity_position = null;
+    change_pause();
+  }
+}
+
+SolidCreator.prototype.stop = function(){
+  if(this.stage > 0){
+    this.stage = 0;
+    this.mass = null;
+    this.solid_position = null;
+    this.velocity_position = null;
+    change_pause();
+  }
+}
+
+
+SolidCreator.prototype.draw = function(){
+  if(this.stage == 1){
+    push()
+    translate(this.solid_position.x, this.solid_position.y);
+    strokeWeight(4);
+    ellipse(0,0,5);
+    pop()
+    this.solid_position.x = mouseX;
+    this.solid_position.y = mouseY;
+    push()
+    translate(this.solid_position.x, this.solid_position.y);
+    stroke('white');
+    ellipse(0,0,5);
+    pop()
+  }
+}
+
+ST = new SolidCreator()
+
 function setup() {
   // Create canvas
   Canvas = createCanvas(W, H);
@@ -41,6 +100,7 @@ function draw() {
     SM.update(20000);
     SM.render();
   }
+  ST.draw();
 }
 
 function windowResized(){
@@ -49,34 +109,32 @@ function windowResized(){
   resizeCanvas(W, H);
 }
 
+
 function switch_to_sim1(){
   SM.change_focus(0)
   background('black')
 }
-
 function switch_to_sim2(){
   SM.change_focus(1)
   background('black')
 }
-
 function change_pause(){
   paused = !paused;
 }
-
 document.getElementById('sim1').addEventListener('click', switch_to_sim1)
 document.getElementById('sim2').addEventListener('click', switch_to_sim2)
 document.getElementById('pause_button').addEventListener('click', change_pause)
 
-
-document.getElementById("toggleableDiv").style.visibility = "hidden";
-
 function showMenu(){
   document.getElementById("toggleableDiv").style.visibility = "visible";
 }
-
 function hideMenu(){
   document.getElementById("toggleableDiv").style.visibility = "hidden";
 }
-
+document.getElementById("toggleableDiv").style.visibility = "hidden";
 document.getElementById("planetenauswahl").addEventListener("mouseover", showMenu);
 document.getElementById("planetenauswahl").addEventListener("mouseout", hideMenu);
+
+document.getElementById('menu').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.stop()}})
+document.getElementById('simulation').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.advance()}})
+document.getElementById('creator').addEventListener('click', function(event){ST.advance();event.stopPropagation();})
