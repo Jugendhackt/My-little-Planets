@@ -14,12 +14,18 @@ Manager.prototype.render = function () {
 
 Manager.prototype.update = function (t) {
   if(split_time){
-    for(var j=0; j<=t;j+=t/time_factor){
+    for(var j=0; j<=t;j+=t/split_factor){
       for(var i=0;i<this.solids.length;i++){
       solid = this.solids[i]
-      solid.update_velocity(t/time_factor, this.solids.slice(0))
-      this.solids[i].move(t/time_factor);
+      solid.update_velocity(t/split_factor, this.solids)
+      this.solids[i].move(t/split_factor);
       }
+    }
+  }
+  else{
+    for(var i=0;i<this.solids.length;i++){
+      this.solids[i].update_velocity(t, this.solids);
+      this.solids[i].move(t);
     }
   }
 };
