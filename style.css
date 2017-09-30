@@ -18,10 +18,12 @@ button:hover{
   z-index: 999;
 }
 
-li{
-  font-size: 20px
-}
+#liA{
+  border-width: 5px;
+  border-radius: 5px;
 
-li:hover{
-  font-size: 30px
+
+}
+label{
+  color: white
 }
