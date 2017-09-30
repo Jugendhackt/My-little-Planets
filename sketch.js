@@ -6,7 +6,7 @@ var H = sim.clientHeight;
 //Constants
 var Canvas,
     G,
-    paused, draw_lines, save_dot_counter, save_dot, full_line,
+    paused, draw_lines, save_dot_counter, save_dot, full_line, planet_textures,
     split_time, split_factor;
 
 //Parameters
@@ -40,7 +40,8 @@ SolidCreator.prototype.advance = function () {
     this.mass = document.getElementById("constant").value*pow(10,document.getElementById("exponent").value);
     var position = this.solid_position
     var velocity = this.velocity_position.sub(this.solid_position);
-    SM.add_solid(new Solid((position.x-W/2)*pow(10,9), (position.y-H/2)*pow(10,9), velocity.x*300, velocity.y*300, this.mass));
+    var sun = loadImage("Objekte/Sonne_klein.png")
+    SM.add_solid(new Solid((position.x-W/2)*pow(10,9), (position.y-H/2)*pow(10,9), velocity.x*300, velocity.y*300, this.mass,sun));
     this.stage = 0;
     this.mass = null;
     this.solid_position = null;
@@ -115,24 +116,33 @@ function setup() {
   Canvas = createCanvas(W, H);
   Canvas.parent("simulation");
 
+  var sun = loadImage("Objekte/Sonne_klein.png");
+  var Merkur = loadImage("Objekte/Merkur_klein.png");
+  var Venus = loadImage("Objekte/Venus_klein.png");
+  var Erde = loadImage("Objekte/Erde.png");
+  var Mars = loadImage("Objekte/Mars_klein.png")
+  var Komet = loadImage("Objekte/Komet.png")
+
   // Set initial values for parameters
   G = 6.67408 * pow(10,-11);
   split_time = true;
   split_factor = 1000;
   paused = false;
-  draw_lines = true;
+  draw_lines = false;
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
+  planet_textures = true;
+
   SM.add_simulation(new Simulation())
-  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
-  SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),sun));
+  SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24),Komet));
   SM.change_focus(1)
-  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),false, 5));                     // Sonne
-  SM.add_solid(new Solid(46001046045,0,0,58984,3.301*pow(10,23),false,3));        // Merkur
-  SM.add_solid(new Solid(1.07411*pow(10,11),0,0,35276,4.867*pow(10,24),false,3)); // Venus                  // Venus
-  SM.add_solid(new Solid(1.471*pow(10,11),0,0,30299,5.974*pow(10,24), false, 3)); // Erde
-  SM.add_solid(new Solid(2.279*pow(10,11),0,0,26511,6.39*pow(10,23), false, 3));  // Mars
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30), sun));   // Sonne
+  SM.add_solid(new Solid(46001046045,0,0,58984,3.301*pow(10,23),Merkur));        // Merkur
+  SM.add_solid(new Solid(1.07411*pow(10,11),0,0,35276,4.867*pow(10,24),Venus)); // Venus
+  SM.add_solid(new Solid(1.471*pow(10,11),0,0,30299,5.974*pow(10,24), Erde)); // Erde
+  SM.add_solid(new Solid(2.279*pow(10,11),0,0,26511,6.39*pow(10,23), Mars));  // Mars
   SM.change_focus(0)
   background('black');
 }
@@ -179,26 +189,35 @@ function change_pause(){
   document.getElementById('pause_button').textContent = content;
 }
 function reset_all(){
+
+  var sun = loadImage("Objekte/Sonne_klein.png");
+  var Merkur = loadImage("Objekte/Merkur_klein.png");
+  var Venus = loadImage("Objekte/Venus_klein.png");
+  var Erde = loadImage("Objekte/Erde.png");
+  var Mars = loadImage("Objekte/Mars_klein.png")
+  var Komet = loadImage("Objekte/Komet.png")
+
   SM = new SimulationManager(new Simulation())
   SM.add_simulation(new Simulation())
   G = 6.67408 * pow(10,-11);
   split_time = true;
   split_factor = 1000;
   paused = false;
-  draw_lines = true;
+  draw_lines = false;
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
+  planet_textures = true;
 
   SM.change_focus(0)
-  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
-  SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5), sun));
+  SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24),Komet));
   SM.change_focus(1)
-  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),false, 5));                     // Sonne
-  SM.add_solid(new Solid(46001046045,0,0,58984,3.301*pow(10,23),false,3));         // Merkur
-  SM.add_solid(new Solid(1.07411*pow(10,11),0,0,35276,4.867*pow(10,24),false,3));  // Venus                  // Venus
-  SM.add_solid(new Solid(1.471*pow(10,11),0,0,30299,5.974*pow(10,24), false, 3));  // Erde
-  SM.add_solid(new Solid(2.279*pow(10,11),0,0,26511,6.39*pow(10,23), false, 3));   // Mars
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),sun));                     // Sonne
+  SM.add_solid(new Solid(46001046045,0,0,58984,3.301*pow(10,23),Merkur));         // Merkur
+  SM.add_solid(new Solid(1.07411*pow(10,11),0,0,35276,4.867*pow(10,24),Venus));  // Venus                  // Venus
+  SM.add_solid(new Solid(1.471*pow(10,11),0,0,30299,5.974*pow(10,24), Erde));  // Erde
+  SM.add_solid(new Solid(2.279*pow(10,11),0,0,26511,6.39*pow(10,23), Mars));   // Mars
   SM.change_focus(0)
   background(0)
 }

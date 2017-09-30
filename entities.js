@@ -82,31 +82,41 @@ Simulation.prototype.reset = function () {
 
 
 
-function Solid(init_posx, init_posy, init_velx, init_vely, mass, bound=false, radius=3){
+function Solid(init_posx, init_posy, init_velx, init_vely, mass, image, bound=false, radius=3){
   this.position = new p5.Vector(init_posx, init_posy);
   this.velocity = new p5.Vector(init_velx, init_vely);
   this.mass = mass;
   this.bound = bound;
-  this.radius = radius;
+  this.image = image;
   this.guarded_dots = [];
+  this.radius = radius;
 }
 
 Solid.prototype.render = function () {
   push();
+
   translate(this.position.x/pow(10,9), this.position.y/pow(10,9));
-  stroke('white');
-  noFill();
-  ellipse(0,0,this.radius);
+  if(planet_textures){
+  var img = this.image;
+  image(img, 0 , 0 , 20,20);
+  }
+  else{
+    stroke('white');
+    noFill();
+    ellipse(0,0,this.radius);
+  }
   pop();
 }
 
 Solid.prototype.reset = function() {
   push();
+  var img = this.image;
   translate(this.position.x/pow(10,9), this.position.y/pow(10,9));
+  image(img, 0, 0, 20, 20);
   stroke('black');
   noFill();
   strokeWeight(4);
-  ellipse(0,0,this.radius);
+  //ellipse(0,0,this.radius);
   pop()
   if(!this.bound){
     if(save_dot){
