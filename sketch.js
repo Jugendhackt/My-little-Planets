@@ -36,7 +36,8 @@ SolidCreator.prototype.advance = function () {
   else if(this.stage == 2){
     this.velocity_position.x = mouseX;
     this.velocity_position.y = mouseY;
-    this.mass = 1.9884*pow(10,30);
+    console.log(document.getElementById("constant").textContent, document.getElementById("exponent").textContent);
+    this.mass = document.getElementById("constant").value*pow(10,document.getElementById("exponent").value);
     var position = this.solid_position
     var velocity = this.velocity_position.sub(this.solid_position);
     SM.add_solid(new Solid((position.x-W/2)*pow(10,9), (position.y-H/2)*pow(10,9), velocity.x*300, velocity.y*300, this.mass));
