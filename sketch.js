@@ -28,9 +28,15 @@ function setup() {
   save_dot = true;
   full_line = false;
   SM.add_simulation(new Simulation())
-
   SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
   SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
+  SM.change_focus(1)
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),true, 5));                     // Sonne
+  SM.add_solid(new Solid(46001046045,0,0,58984,3.301*pow(10,23),false,3));        // Merkur
+  SM.add_solid(new Solid(1.07411*pow(10,11),0,0,35276,4.867*pow(10,24),false,3)); // Venus                  // Venus
+  SM.add_solid(new Solid(1.471*pow(10,11),0,0,30299,5.974*pow(10,24), false, 3)); // Erde
+  SM.add_solid(new Solid(2.279*pow(10,11),0,0,26511,6.39*pow(10,23), false, 3));  // Mars
+  SM.change_focus(0)
   background('black');
 }
 
