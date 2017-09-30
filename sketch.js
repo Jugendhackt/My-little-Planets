@@ -1,5 +1,7 @@
-var W = window.innerWidth;
-var H = window.innerHeight;
+var sim = document.getElementById("simulation");
+
+var W = sim.clientWidth;
+var H = sim.clientHeight;
 
 var r = 200;
 var phi = 0;
@@ -7,8 +9,8 @@ var cx = W/2 + r;
 var cy = H/2;
 
 function setup() {
-  createCanvas(W, H);
-
+  var canvas = createCanvas(W, H);
+  canvas.parent("simulation");
 }
 
 function draw() {
@@ -23,7 +25,7 @@ function draw() {
 }
 
 function windowResized(){
-  W = window.innerWidth;
-  H = window.innerHeight;
+  W = sim.clientWidth;
+  H = sim.clientHeight;
   resizeCanvas(W, H);
 }
