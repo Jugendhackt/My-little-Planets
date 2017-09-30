@@ -168,6 +168,14 @@ function switch_to_sim2(){
 }
 function change_pause(){
   paused = !paused;
+  var content;
+  if(paused){
+    content = "|>"
+  }
+  else{
+    content = "||"
+  }
+  document.getElementById('pause_button').textContent = content;
 }
 document.getElementById('sim1').addEventListener('click', switch_to_sim1)
 document.getElementById('sim2').addEventListener('click', switch_to_sim2)
