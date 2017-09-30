@@ -23,7 +23,7 @@ function setup() {
   split_time = true;
   split_factor = 1000;
   paused = false;
-  draw_lines = false;
+  draw_lines = true;
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
