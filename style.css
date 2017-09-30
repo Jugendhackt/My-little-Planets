@@ -1,10 +1,2 @@
-button{
-  padding: 20px 10px;
-  background-color: #333333;
-  border: none;
-  color: white
-}
-button:hover{
-  /*background-color: #ff6400;*/
-  color: #ff6400
-}
+@font-face { font-family: 'karmatic_arcade';
+             src: url('ka1.ttf') format('truetype'); }
