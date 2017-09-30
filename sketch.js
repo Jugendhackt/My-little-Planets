@@ -36,8 +36,8 @@ SolidCreator.prototype.advance = function () {
   else if(this.stage == 2){
     this.velocity_position.x = mouseX;
     this.velocity_position.y = mouseY;
-    console.log(document.getElementById("constant").textContent, document.getElementById("exponent").textContent);
-    this.mass = document.getElementById("constant").value*pow(10,document.getElementById("exponent").value);
+    console.log(document.getElementById("constant").value, document.getElementById("exponent").value);
+    this.mass = float(document.getElementById("constant").value)*pow(10,float(document.getElementById("exponent").value));
     var position = this.solid_position
     var velocity = this.velocity_position.sub(this.solid_position);
     var sun = loadImage("Objekte/Sonne_klein.png")
