@@ -11,12 +11,22 @@
 
   <!-- this line removes any default padding and style. you might only need one of these values set. -->
   <style> body {padding: 0; margin: 0;} </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div class="container-fluid">
-    <div id="menu" class="row">
-      <button type="button" class="btn btn-light">Light</button>
+    <div id="menu" class="row" style="background-color: #333333">
+      <div class="col-sm-4">
+        <button type="button" >Light</button>
+        <button type="button" >Light</button>
+        <button type="button" >Light</button>
+      </div>
+      <div class="col-sm-7">
+      </div>
+      <div class="col-sm-1">
+        <button>Credits</button>
+      </div>
     </div>
     <div id="simulation" class="row" style="bottom:0; position:relative; top:0; height:100%"></div>
   </div>
