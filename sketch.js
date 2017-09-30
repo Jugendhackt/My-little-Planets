@@ -11,10 +11,7 @@ var Canvas,
 
 //Parameters
 
-var OM = new Manager();
-
-
-console.log(OM);
+var SM = new SimulationManager(new Simulation());
 
 function setup() {
   // Create canvas
@@ -26,22 +23,23 @@ function setup() {
   split_time = false;
   split_factor = 1000;
   paused = false;
-  draw_lines = true;
+  draw_lines = false;
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
+  SM.add_simulation(new Simulation())
 
-  OM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
-  OM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
+  SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
   background('black');
 }
 
 function draw() {
   if(!paused){
     translate(W/2, H/2);
-    OM.reset();
-    OM.update(20000);
-    OM.render();
+    SM.reset();
+    SM.update(20000);
+    SM.render();
   }
 }
 
@@ -50,3 +48,15 @@ function windowResized(){
   H = sim.clientHeight;
   resizeCanvas(W, H);
 }
+
+function switch_to_sim1(){
+
+  SM.change_focus(0)
+}
+
+function switch_to_sim2(){
+  SM.change_focus(1)
+}
+
+document.getElementById('sim1').addEventListener('click', switch_to_sim1)
+document.getElementById('sim2').addEventListener('click', switch_to_sim2)
