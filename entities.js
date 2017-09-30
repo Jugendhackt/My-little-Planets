@@ -124,9 +124,6 @@ Solid.prototype.reset = function() {
 
 }
 
-
-
-
 }
 
 

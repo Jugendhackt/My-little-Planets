@@ -28,17 +28,70 @@ SolidCreator.prototype.advance = function () {
     this.stage++;
   }
   else if(this.stage == 1){
+    this.solid_position.x = mouseX;
+    this.solid_position.y = mouseY;
+    this.velocity_position = new p5.Vector(mouseX, mouseY);
     this.stage++;
   }
   else if(this.stage == 2){
-    this.mass = 29.78*pow(10,3);
-
-
+    this.velocity_position.x = mouseX;
+    this.velocity_position.y = mouseY;
+    this.mass = 1.9884*pow(10,30);
+    var position = this.solid_position
+    var velocity = this.velocity_position.sub(this.solid_position);
+    SM.add_solid(new Solid((position.x-W/2)*pow(10,9), (position.y-H/2)*pow(10,9), velocity.x*300, velocity.y*300, this.mass));
     this.stage = 0;
     this.mass = null;
     this.solid_position = null;
     this.velocity_position = null;
     change_pause();
+    background('black');
+  }
+}
+
+SolidCreator.prototype.draw = function(){
+  if(this.stage == 1){
+    this.solid_position.x = mouseX;
+    this.solid_position.y = mouseY;
+    push();
+    translate(this.solid_position.x, this.solid_position.y);
+    stroke('white');
+    ellipse(0,0,5);
+    pop();
+  }
+  else if(this.stage == 2){
+    this.velocity_position.x = mouseX;
+    this.velocity_position.y = mouseY;
+    push();
+    stroke('white');
+    translate(this.solid_position.x, this.solid_position.y);
+    ellipse(0,0,5);
+    translate(-this.solid_position.x, -this.solid_position.y);
+    line(this.solid_position.x, this.solid_position.y, this.velocity_position.x, this.velocity_position.y)
+    fill('white');
+    translate(this.velocity_position.x, this.velocity_position.y);
+    ellipse(0,0,3);
+    pop();
+
+  }
+}
+SolidCreator.prototype.delete = function(){
+  if(this.stage == 1){
+    push();
+    translate(this.solid_position.x, this.solid_position.y);
+    strokeWeight(4);
+    ellipse(0,0,5);
+    pop();
+  }
+  else if(this.stage == 2){
+    push();
+    strokeWeight(4);
+    translate(this.solid_position.x, this.solid_position.y);
+    ellipse(0,0,5);
+    translate(-this.solid_position.x, -this.solid_position.y);
+    line(this.solid_position.x, this.solid_position.y, this.velocity_position.x, this.velocity_position.y)
+    ellipse(0,0,5);
+    pop();
   }
 }
 
@@ -49,26 +102,10 @@ SolidCreator.prototype.stop = function(){
     this.solid_position = null;
     this.velocity_position = null;
     change_pause();
+    this.delete();
   }
 }
 
-
-SolidCreator.prototype.draw = function(){
-  if(this.stage == 1){
-    push()
-    translate(this.solid_position.x, this.solid_position.y);
-    strokeWeight(4);
-    ellipse(0,0,5);
-    pop()
-    this.solid_position.x = mouseX;
-    this.solid_position.y = mouseY;
-    push()
-    translate(this.solid_position.x, this.solid_position.y);
-    stroke('white');
-    ellipse(0,0,5);
-    pop()
-  }
-}
 
 ST = new SolidCreator()
 
@@ -82,7 +119,7 @@ function setup() {
   split_time = true;
   split_factor = 1000;
   paused = false;
-  draw_lines = false;
+  draw_lines = true;
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
@@ -90,7 +127,7 @@ function setup() {
   SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),true, 5));
   SM.add_solid(new Solid(1.496*pow(10,11),0,0,29.78*pow(10,3),5.974*pow(10,24)));
   SM.change_focus(1)
-  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),true, 5));                     // Sonne
+  SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),false, 5));                     // Sonne
   SM.add_solid(new Solid(46001046045,0,0,58984,3.301*pow(10,23),false,3));        // Merkur
   SM.add_solid(new Solid(1.07411*pow(10,11),0,0,35276,4.867*pow(10,24),false,3)); // Venus                  // Venus
   SM.add_solid(new Solid(1.471*pow(10,11),0,0,30299,5.974*pow(10,24), false, 3)); // Erde
@@ -100,19 +137,24 @@ function setup() {
 }
 
 function draw() {
+  push()
+  translate(W/2, H/2);
+  SM.reset();
   if(!paused){
-    translate(W/2, H/2);
-    SM.reset();
     SM.update(20000);
-    SM.render();
   }
+  SM.render();
+  pop()
+  ST.delete();
   ST.draw();
+
 }
 
 function windowResized(){
   W = sim.clientWidth;
   H = sim.clientHeight;
   resizeCanvas(W, H);
+  background('black');
 }
 
 
@@ -143,4 +185,4 @@ document.getElementById("planetenauswahl").addEventListener("mouseout", hideMenu
 
 document.getElementById('menu').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.stop()}})
 document.getElementById('simulation').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.advance()}})
-document.getElementById('creator').addEventListener('click', function(event){ST.advance();event.stopPropagation();})
+document.getElementById('creator').addEventListener('click', function(event){if(ST.stage == 0){ST.advance();event.stopPropagation();}})
