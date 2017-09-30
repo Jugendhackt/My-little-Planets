@@ -66,3 +66,17 @@ function change_pause(){
 document.getElementById('sim1').addEventListener('click', switch_to_sim1)
 document.getElementById('sim2').addEventListener('click', switch_to_sim2)
 document.getElementById('pause_button').addEventListener('click', change_pause)
+
+
+document.getElementById("toggleableDiv").style.visibility = "hidden";
+
+function showMenu(){
+  document.getElementById("toggleableDiv").style.visibility = "visible";
+}
+
+function hideMenu(){
+  document.getElementById("toggleableDiv").style.visibility = "hidden";
+}
+
+document.getElementById("planetenauswahl").addEventListener("mouseover", showMenu);
+document.getElementById("planetenauswahl").addEventListener("mouseout", hideMenu);
