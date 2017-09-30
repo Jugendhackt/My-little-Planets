@@ -50,3 +50,16 @@ function windowResized(){
   H = sim.clientHeight;
   resizeCanvas(W, H);
 }
+
+document.getElementById("toggleableDiv").style.visibility = "hidden";
+
+function showMenu(){
+  document.getElementById("toggleableDiv").style.visibility = "visible";
+}
+
+function hideMenu(){
+  document.getElementById("toggleableDiv").style.visibility = "hidden";
+}
+
+document.getElementById("planetenauswahl").addEventListener("mouseover", showMenu);
+document.getElementById("planetenauswahl").addEventListener("mouseout", hideMenu);
