@@ -1,13 +1,16 @@
-var W = window.innerWidth;
-var H = window.innerHeight;
+var sim = document.getElementById("simulation");
+
+var W = sim.clientWidth;
+var H = sim.clientHeight;
 
 var OM = new Manager();
 
-OM.add_solid(new Solid(600,200,0,10,1));
+OM.add_solid(new Solid(600,200,0,-10,1));
 
 console.log(OM);
 function setup() {
-  createCanvas(W, H);
+  var canvas = createCanvas(W, H);
+  canvas.parent("simulation");
 }
 
 function draw() {
@@ -17,7 +20,7 @@ function draw() {
 }
 
 function windowResized(){
-  W = window.innerWidth;
-  H = window.innerHeight;
+  W = sim.clientWidth;
+  H = sim.clientHeight;
   resizeCanvas(W, H);
 }
