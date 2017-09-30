@@ -1,18 +1,29 @@
 var W = window.innerWidth;
 var H = window.innerHeight;
 
+//Constants
+var G;
+
+//Parameters
+var split_time = true;
+var split_factor = 1000;
+
 var OM = new Manager();
 
-OM.add_solid(new Solid(600,200,0,10,1));
 
 console.log(OM);
 function setup() {
   createCanvas(W, H);
+  G = 6.67408 * pow(10,-11)
+
+  OM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30),false, 100));
+  OM.add_solid(new Solid(1.496*pow(10,10),0,0,29.78*pow(10,3),5.974*pow(10,24)));
 }
 
 function draw() {
   background('black');
-  OM.update(0.1)
+  translate(W/2,H/2);
+  OM.update(1000)
   OM.render();
 }
 
