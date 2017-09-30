@@ -1,18 +1,50 @@
-function Manager(){
+function SimulationManager(sim){
+  this.focus=0;
+  this.simulations=[sim]
+}
+
+SimulationManager.prototype.add_simulation = function(sim){
+  this.simulations.push(sim)
+}
+
+SimulationManager.prototype.change_focus = function(new_focus){
+  if(new_focus>=0 && new_focus<=this.simulations.length){
+    this.focus = new_focus;
+  }
+}
+
+SimulationManager.prototype.add_solid = function(solid){
+  this.simulations[this.focus].add_solid(solid);
+};
+
+SimulationManager.prototype.render = function () {
+  this.simulations[this.focus].render();
+};
+
+SimulationManager.prototype.update = function (t) {
+  this.simulations[this.focus].update(t);
+};
+
+SimulationManager.prototype.reset = function () {
+  this.simulations[this.focus].reset();
+};
+
+
+function Simulation(){
   this.solids = [];
 };
 
-Manager.prototype.add_solid = function(solid){
+Simulation.prototype.add_solid = function(solid){
   this.solids.push(solid);
 };
 
-Manager.prototype.render = function () {
+Simulation.prototype.render = function () {
   for(var i=0;i<this.solids.length;i++){
     this.solids[i].render();
   }
 };
 
-Manager.prototype.update = function (t) {
+Simulation.prototype.update = function (t) {
   if(split_time){
     for(var j=0; j<=t;j+=t/split_factor){
       for(var i=0;i<this.solids.length;i++){
@@ -30,7 +62,7 @@ Manager.prototype.update = function (t) {
   }
 };
 
-Manager.prototype.reset = function () {
+Simulation.prototype.reset = function () {
 
   if(draw_lines){
     if(save_dot_counter >= 15 && !full_line){
