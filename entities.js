@@ -140,7 +140,6 @@ Solid.prototype.reset = function() {
 
 }
 
-
 Solid.prototype.move = function (t) {
   this.position.add(new p5.Vector(this.velocity.x*t,this.velocity.y*t))
 }

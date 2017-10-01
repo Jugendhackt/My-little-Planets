@@ -184,15 +184,24 @@ function draw() {
   SM.reset();
   if(!paused){
     SM.update(20000);
+    number_of_iterations = number_of_iterations + 1;
   }
   SM.render();
-  number_of_iterations = number_of_iterations + 1;
+  push()
+  fill('grey');
+  rect(350,120,150, 40)
+  textSize(40);
+  //text(str(round(number_of_iterations-1/4.32)) + " Tage", 350, 150);
+  pop()
+  push()
   fill(255,255,255);
   textSize(32);
   text(str(round(number_of_iterations/4.32)) + " Tage", 350, 150);
   pop()
+  pop()
   ST.delete();
   ST.draw();
+
 }
 
 function windowResized(){
