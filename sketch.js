@@ -6,7 +6,7 @@ var H = sim.clientHeight;
 //Constants
 var Canvas,
     G,
-    paused, draw_lines, save_dot_counter, save_dot, full_line, planet_textures,
+    paused, save_dot_counter, save_dot, full_line, planet_textures,
     split_time, split_factor;
 
 //Parameters
@@ -128,11 +128,10 @@ function setup() {
   split_time = true;
   split_factor = 1000;
   paused = false;
-  draw_lines = false;
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
-  planet_textures = true;
+  planet_textures = false;
 
   SM.add_simulation(new Simulation())
   SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),sun));
@@ -221,10 +220,15 @@ function reset_all(){
   SM.change_focus(0)
   background(0)
 }
+function change_graphics(){
+  planet_textures = !planet_textures;
+  background('black');
+}
 document.getElementById('sim1').addEventListener('click', switch_to_sim1)
 document.getElementById('sim2').addEventListener('click', switch_to_sim2)
 document.getElementById('pause_button').addEventListener('click', change_pause)
 document.getElementById('reset_button').addEventListener('click', reset_all)
+document.getElementById('texture_button').addEventListener('click', change_graphics)
 
 
 function showMenu(){

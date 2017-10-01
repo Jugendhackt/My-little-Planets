@@ -64,7 +64,7 @@ Simulation.prototype.update = function (t) {
 
 Simulation.prototype.reset = function () {
 
-  if(draw_lines){
+  if(!planet_textures){
     if(save_dot_counter >= 15 && !full_line){
       save_dot = !save_dot
       save_dot_counter = 0
@@ -75,7 +75,7 @@ Simulation.prototype.reset = function () {
     save_dot_counter+=1
   }
     else{
-      background('black')
+      background('black');
   }
 
 };
@@ -97,8 +97,8 @@ Solid.prototype.render = function () {
 
   translate(this.position.x/pow(10,9), this.position.y/pow(10,9));
   if(planet_textures){
-  var img = this.image;
-  image(img, 0 , 0 , 20,20);
+    var img = this.image;
+    image(img, 0 , 0 , 20,20);
   }
   else{
     stroke('white');
@@ -110,13 +110,17 @@ Solid.prototype.render = function () {
 
 Solid.prototype.reset = function() {
   push();
-  var img = this.image;
   translate(this.position.x/pow(10,9), this.position.y/pow(10,9));
-  image(img, 0, 0, 20, 20);
-  stroke('black');
-  noFill();
-  strokeWeight(4);
-  //ellipse(0,0,this.radius);
+  if(planet_textures){
+    ellipse(0,0,15);
+
+  }
+  else{
+    stroke('black');
+    noFill();
+    strokeWeight(4);
+    ellipse(0,0,this.radius);
+  }
   pop()
   if(!this.bound){
     if(save_dot){
