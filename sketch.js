@@ -159,7 +159,7 @@ function setup() {
   save_dot_counter = 0;
   save_dot = true;
   full_line = false;
-  planet_textures = false;
+  planet_textures = true;
 
   SM.add_simulation(new Simulation())
   SM.add_solid(new Solid(0,0,0,0,1.9884*pow(10,30.5),sun));
