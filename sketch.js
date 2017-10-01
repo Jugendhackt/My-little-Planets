@@ -257,17 +257,6 @@ document.getElementById('pause_button').addEventListener('click', change_pause)
 document.getElementById('reset_button').addEventListener('click', reset_all)
 document.getElementById('texture_button').addEventListener('click', change_graphics)
 
-
-function showMenu(){
-  document.getElementById("toggleableDiv").style.visibility = "visible";
-}
-function hideMenu(){
-  document.getElementById("toggleableDiv").style.visibility = "hidden";
-}
-document.getElementById("toggleableDiv").style.visibility = "hidden";
-document.getElementById("planetenauswahl").addEventListener("mouseover", showMenu);
-document.getElementById("planetenauswahl").addEventListener("mouseout", hideMenu);
-
 document.getElementById('menu').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.stop()}})
 document.getElementById('simulation').addEventListener('click', function(){if(ST.stage > 0 && ST.stage < 3){ST.advance()}})
 document.getElementById('creator_button').addEventListener('click', function(event){if(ST.stage == 0){ST.advance();event.stopPropagation();}})
