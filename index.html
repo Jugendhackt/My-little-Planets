@@ -19,22 +19,27 @@
   <div class="container-fluid">
     <div id="menu" class="row" style="background-color: #333333">
       <div class="col-sm-3">
-        <button id="planetenauswahl" >Light
+        <button id="planetenauswahl" >Planeten
           <div id="toggleableDiv">
-            <ol>
-              <li>Merkur &nbsp&nbsp</li>
-              <li>Venus</li>
-              <li>erde</li>
-            </ol>
+            <ul>
+              <li> <a href="https://de.wikipedia.org/wiki/Merkur_(Planet)"> Merkur </a> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Venus_(Planet)"> Venus </a> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Erde"> Erde <a/> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Mars_(Planet)"> Mars <a/> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Jupiter_(Planet)"> Jupiter <a/> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Saturn_(Planet)"> Saturn <a/> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Uranus_(Planet)"> Uranus <a/> </li>
+              <li> <a href="https://de.wikipedia.org/wiki/Neptun_(Planet)"> Neptun <a/> </li>
+            </ul>
           </div>
         </button>
 
-        <button type="button" id="sim1">Sun+Planet</button>
-        <button type="button" id="sim2">Solar-System</button>
+        <button type="button" id="sim1">Sonne+Satellit</button>
+        <button type="button" id="sim2">Sonnensystem</button>
 
-        <button type="button" id="creator_button">Create</button>
-        <button type="button" id="reset_button">Reset</button>
-        <button type="button" id="texture_button">Graphics</button>
+        <button type="button" id="creator_button">Körper einfügen</button>
+        <button type="button" id="reset_button">Zurücksetzen</button>
+        <button type="button" id="texture_button">Grafik</button>
         <button type="button" id="pause_button">
           <img id="pause_button_image" src="Objekte/pausebutton.svg" width="20px" alt="Pause">
           <img id="start_button_image" src="Objekte/startbutton.svg" width="20px" style="display:none" alt="Start">
@@ -51,7 +56,7 @@
         </label>
       </div>
       <div class="col-sm-2">
-        <label for="exponent">10ner-Potenz:
+        <label for="exponent">10er-Potenz:
           <input id="exponent" name="exponent" type="text">
         </label>
 
