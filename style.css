@@ -11,12 +11,6 @@ button{
 button:hover{
   color: #ff6400
 }
-#toggleableDiv{
-  position:fixed;
-  top: 64px;
-  background-color: #777777;
-  z-index: 999;
-}
 
 #liA{
   border-width: 5px;
