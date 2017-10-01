@@ -23,7 +23,9 @@ function SolidCreator(){
 
 SolidCreator.prototype.advance = function () {
   if(this.stage==0){
-    change_pause();
+    if(!paused){
+      change_pause();
+    }
     this.solid_position = new p5.Vector(mouseX, mouseY);
     this.stage++;
   }
@@ -40,8 +42,28 @@ SolidCreator.prototype.advance = function () {
     this.mass = float(document.getElementById("constant").value)*pow(10,float(document.getElementById("exponent").value));
     var position = this.solid_position
     var velocity = this.velocity_position.sub(this.solid_position);
-    var sun = loadImage("Objekte/Sonne_klein.png")
-    SM.add_solid(new Solid((position.x-W/2)*pow(10,9), (position.y-H/2)*pow(10,9), velocity.x*300, velocity.y*300, this.mass,sun));
+
+    var texture;
+
+    if(this.mass >= 1.8*pow(10, 30)){
+      texture = loadImage("Objekte/Sonne_klein.png")
+    }
+
+    else if(this.mass >= 5.8*pow(10,24)){
+      texture = loadImage("Objekte/Erde.png")
+    }
+
+    else if(this.mass >= 1.8*pow(10, 15)){
+      texture = loadImage("Objekte/Komet.png");
+    }
+
+    else{
+      texture = loadImage("Objekte/Raumschiff_klein.png")
+    }
+
+
+
+    SM.add_solid(new Solid((position.x-W/2)*pow(10,9), (position.y-H/2)*pow(10,9), velocity.x*300, velocity.y*300, this.mass,texture));
     this.stage = 0;
     this.mass = null;
     this.solid_position = null;
