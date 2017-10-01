@@ -27,3 +27,11 @@ button:hover{
 label{
   color: white
 }
+
+li{
+  font-size: 16px
+}
+
+li:hover{
+  font-size: 26px
+}
